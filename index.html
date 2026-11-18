@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gábor Váradi Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* layout: single reading column, project dossiers with a mono meta rail */
+  --bg:#f2f5f3; --surface:#ffffff; --ink:#0f1f1a; --muted:#51615a; --line:#d5ddd8;
+  --accent:#1b7a5a; --accent-ink:#ffffff; --tag:#e3efe9;
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1714; --surface:#15211d; --ink:#e8f0ec; --muted:#9bb0a7; --line:#27382f;
+    --accent:#4cc79a; --accent-ink:#06130d; --tag:#1d3029; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1714; --surface:#15211d; --ink:#e8f0ec; --muted:#9bb0a7; --line:#27382f;
+  --accent:#4cc79a; --accent-ink:#06130d; --tag:#1d3029; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.top{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--font-mono);font-size:13px;color:var(--muted);letter-spacing:.04em;margin:0 0 14px}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(38px,7vw,64px);line-height:1.05;margin:0 0 10px;text-wrap:balance}
+.role{font-family:var(--font-display);font-weight:500;font-size:clamp(19px,3vw,24px);color:var(--accent);margin:0 0 22px}
+.lead{max-width:62ch;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font:500 15px var(--font-body);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{border-color:var(--accent)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-family:var(--font-display);font-weight:700;font-size:28px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 26px;max-width:62ch}
+.proj{display:grid;grid-template-columns:200px 1fr;gap:8px 28px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:18px}
+.meta{font-family:var(--font-mono);font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.meta b{display:block;color:var(--ink);font-weight:500}
+.proj h3{font-family:var(--font-display);font-size:22px;margin:0 0 4px;line-height:1.25}
+.proj .studio{color:var(--muted);margin:0 0 12px;font-size:15px}
+.proj ul{margin:10px 0 14px;padding-left:20px}
+.proj li{margin-bottom:4px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
+.tags li{margin:0;background:var(--tag);color:var(--ink);font:500 12.5px var(--font-mono);padding:3px 9px;border-radius:99px}
+.links{display:flex;flex-wrap:wrap;gap:14px;font-weight:500}
+.small{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h3{font-family:var(--font-display);font-size:18px;margin:0 0 2px}
+.card .r{font:13px var(--font-mono);color:var(--muted);margin:0 0 8px}
+.card p{margin:0 0 10px;font-size:15.5px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.skills h3{font:500 13px var(--font-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.skills ul{margin:0;padding-left:18px}
+.ai{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:22px}
+.ai ul{margin:10px 0 0;padding-left:20px}
+footer{padding:36px 0 56px;color:var(--muted);font-size:15px}
+.contact{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+@media (max-width:640px){
+  .proj{grid-template-columns:1fr;padding:18px}
+  .meta{flex-direction:row;flex-wrap:wrap;gap:4px 18px}
+  header.top{padding-top:36px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">PORTFOLIO &middot; GAME DEVELOPMENT &middot; HUNGARY, OPEN TO REMOTE</p>
+  <h1>Gábor Váradi</h1>
+  <p class="role">Senior Game Developer | Senior Software Engineer</p>
+  <p class="lead">I build and maintain game systems in C#: gameplay, UI architecture, audio, analytics and internal tooling. 16+ years in software, 6+ of them in game development, most recently on a live merge game for iOS and Android. I also work daily with agentic AI development workflows.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://www.linkedin.com/in/varadig/">LinkedIn profile</a>
+    <a class="btn" href="#projects">See projects</a>
+    <button class="btn" id="copyMail" type="button" data-mail="varadi.gabor@icloud.com">Copy email</button>
+  </div>
+</header>
+
+<section id="projects">
+  <h2>Game projects</h2>
+  <p class="sub">Shipped work from the last six years in game development.</p>
+
+  <article class="proj">
+    <div class="meta">
+      <span><b>Role</b>Game Developer</span>
+      <span><b>Period</b>Jul 2023 &ndash; Nov 2026</span>
+      <span><b>Platforms</b>iOS, Android</span>
+      <span><b>Status</b>Live in stores</span>
+    </div>
+    <div>
+      <h3>Bloom &amp; Breakfast: Merge Town</h3>
+      <p class="studio">Fortis Games &middot; fully remote, international team</p>
+      <p>A cozy merge simulation I worked on for almost 3.5 years. I worked across nearly every area of the game and kept it stable and maintainable in live operation.</p>
+      <ul>
+        <li>Built, maintained and extended the UI system</li>
+        <li>Implemented gameplay features</li>
+        <li>Integrated audio and supported the audio pipeline</li>
+        <li>Integrated analytics</li>
+        <li>Implemented local notifications</li>
+        <li>Built internal tooling</li>
+      </ul>
+      <ul class="tags"><li>C#</li><li>UI architecture</li><li>Gameplay</li><li>Analytics</li><li>Tooling</li></ul>
+      <div class="links">
+        <a href="https://apps.apple.com/hu/app/bloom-breakfast-merge-town/id6761016932">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.fortisgames.mergefarmadventure">Google Play</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="meta">
+      <span><b>Role</b>Senior UI Developer</span>
+      <span><b>Period</b>2020 &ndash; 2023</span>
+      <span><b>Platforms</b>iOS</span>
+    </div>
+    <div>
+      <h3>Dragon Mania Legends</h3>
+      <p class="studio">Gameloft Budapest &middot; iOS team</p>
+      <p>Joined after many years of independent work to build UI for a mobile game in a team.</p>
+      <ul>
+        <li>Built the UI for new game features</li>
+        <li>Developed a new UI framework</li>
+        <li>Redesigned the legacy static UI code</li>
+      </ul>
+      <ul class="tags"><li>UI framework</li><li>Legacy code redesign</li><li>Mobile</li></ul>
+      <div class="links"><a href="https://apps.apple.com/us/app/dragon-mania-legends/id882507985">App Store</a></div>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="meta">
+      <span><b>Role</b>Full-stack dev, editor and tools</span>
+      <span><b>Period</b>Freelance</span>
+      <span><b>Platforms</b>Mac, PC</span>
+    </div>
+    <div>
+      <h3>Dynamic Dungeons</h3>
+      <p class="studio">Desktop toolset for role-playing game masters</p>
+      <p>A three-in-one desktop application with an Editor, a Player and a Manager.</p>
+      <ul>
+        <li>In the Editor you build a storyline from videos and pictures</li>
+        <li>Set backgrounds and PNG images, and add particle effects and audio files</li>
+        <li>The Player runs the finished scenes</li>
+      </ul>
+      <ul class="tags"><li>Editor tooling</li><li>Particle effects</li><li>Audio</li><li>Desktop</li></ul>
+      <div class="links"><a href="https://dynamicdungeons.com/">dynamicdungeons.com</a></div>
+    </div>
+  </article>
+</section>
+
+<section id="ai">
+  <h2>Agentic AI development</h2>
+  <p class="sub">Not new to me. I have used these workflows in a production environment.</p>
+  <div class="ai">
+    <p style="margin:0">Tools and workflows I work with:</p>
+    <ul>
+      <li>Claude Code and GitHub Copilot</li>
+      <li>MCP integrations (Unity, Datadog and others)</li>
+      <li>An in-house Node.js-based AI orchestration package</li>
+    </ul>
+  </div>
+</section>
+
+<section id="other">
+  <h2>Other projects</h2>
+  <p class="sub">From more than ten years of freelance work on games, mobile apps, interactive installations, digital advertising experiences and custom software.</p>
+  <div class="small">
+    <div class="card">
+      <h3>KITÁR</h3>
+      <p class="r">iOS &middot; 2017 &ndash; present</p>
+      <p>Infection control system for hospitals, built as an iPad app.</p>
+      <a href="https://apps.apple.com/hu/app/kit%C3%A1r/id1321921392">App Store</a>
+    </div>
+    <div class="card">
+      <h3>Motano</h3>
+      <p class="r">Full-stack dev</p>
+      <p>Real-time indoor location tracking based on iBeacon technology, client and server side.</p>
+      <a href="https://atlosz.hu/mozgas-kovet-belteri-helymeghatarozo-rendszer">Project page</a>
+    </div>
+    <div class="card">
+      <h3>Student Discount System</h3>
+      <p class="r">Mobile dev &middot; iOS and Android</p>
+      <p>Cross-platform app with push notifications, a QR code reader and GPS features.</p>
+      <a href="https://atlosz.hu/diakkedvezmeny-rendszer-a">Project page</a> &middot; <a href="https://play.google.com/store/apps/details?id=air.hu.atlosz.diak.pont">Google Play</a>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Technical skills</h2>
+  <div class="skills" style="margin-top:20px">
+    <div><h3>Languages</h3><ul><li>C# (primary)</li><li>Haxe</li><li>JavaScript / Node.js</li></ul></div>
+    <div><h3>Game systems</h3><ul><li>Gameplay systems</li><li>UI architecture</li><li>Audio integration</li><li>Analytics</li><li>Local notifications</li></ul></div>
+    <div><h3>Engineering</h3><ul><li>Internal tooling, custom editors</li><li>CI/CD, Git</li><li>Full-stack development</li></ul></div>
+    <div><h3>Platforms</h3><ul><li>iOS, Android</li><li>macOS, PC</li></ul></div>
+  </div>
+</section>
+
+<footer>
+  <h2 style="font-size:22px">Get in touch</h2>
+  <p style="margin:6px 0 16px">Looking for Senior Game Developer, Senior Software Engineer and C# roles, ideally fully remote with an international team.</p>
+  <div class="contact">
+    <span>varadi.gabor@icloud.com</span>
+    <a href="https://www.linkedin.com/in/varadig/">linkedin.com/in/varadig</a>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  var b=document.getElementById('copyMail');
+  if(!b) return;
+  b.addEventListener('click',function(){
+    var done=function(t){b.textContent=t;setTimeout(function(){b.textContent='Copy email';},2000);};
+    try{
+      navigator.clipboard.writeText(b.getAttribute('data-mail')).then(function(){done('Copied');},function(){done('varadi.gabor@icloud.com');});
+    }catch(e){done('varadi.gabor@icloud.com');}
+  });
+})();
+</script>
+</body>
+</html>
